@@ -26,3 +26,15 @@ func MsgEscape(inputc chan Message) chan Message {
 	} ()
 	return retc
 }
+
+func MsgToHTML(inputc chan Message) chan string {
+	retc := make(chan string, 10)
+	go func() {
+		defer close(retc)
+		for input := range(inputc) {
+			str := "<div style=\"background-color:green\"><h3>" + input.Name + "</h3><p>" + input.Contents + "</p></div>"
+			retc <- str
+		}
+	} ()
+	return retc
+}

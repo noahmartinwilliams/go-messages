@@ -29,3 +29,14 @@ func TestMsgEscape(t *testing.T) {
 	}
 
 }
+
+func TestMsgToHTML(t *testing.T) {
+	inputc := make(chan Message)
+	outc := MsgToHTML(inputc)
+
+	inputc <- Message{Name:"noah", Contents:"hello, world."}
+	out1 := <-outc
+	if out1 != "<div style=\"background-color:green\"><h3>noah</h3><p>hello, world.</p></div>" {
+		t.Errorf("Error: MsgToHTML did not return correct output on first test. Got: \"" + out1 + "\"")
+	}
+}
