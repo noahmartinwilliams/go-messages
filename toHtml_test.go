@@ -40,3 +40,19 @@ func TestMsgToHTML(t *testing.T) {
 		t.Errorf("Error: MsgToHTML did not return correct output on first test. Got: \"" + out1 + "\"")
 	}
 }
+
+func TestMsgsToHTML(t *testing.T) {
+	inputc := make(chan Message)
+	go func() {
+		defer close(inputc)
+		inputc <- Message{Name:"noah", Contents:"hi"}
+	} ()
+
+	inputc2 := MsgToHTML(inputc)
+
+	html := MsgsToHTML(inputc2)
+
+	if html != "<html><body><center><div style=\"background-color:green\"><h3>noah</h3><p>hi</p></div><br/><form action=\"/comment\">Name: <input type=\"text\" name=\"name\"><br/>Comment: <input type=\"text\" name=\"contents\"><br/><input type=\"submit\" value=\"Submit\"></form></center></body></html>" {
+		t.Errorf("Error: MsgsToHTML failed first test. Got: \"" + html + "\".")
+	}
+}

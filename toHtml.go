@@ -38,3 +38,13 @@ func MsgToHTML(inputc chan Message) chan string {
 	} ()
 	return retc
 }
+
+func MsgsToHTML(inputc chan string) string {
+	ret := "<html><body><center>"
+	for input := range(inputc) {
+		ret = ret + input
+	}
+
+	ret = ret + "<br/><form action=\"/comment\">Name: <input type=\"text\" name=\"name\"><br/>Comment: <input type=\"text\" name=\"contents\"><br/><input type=\"submit\" value=\"Submit\"></form></center></body></html>"
+	return ret
+}
