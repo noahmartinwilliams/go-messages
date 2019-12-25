@@ -52,7 +52,7 @@ func TestMsgsToHTML(t *testing.T) {
 
 	html := MsgsToHTML(inputc2)
 
-	if html != "<html><body><center><div style=\"background-color:green\"><h3>noah</h3><p>hi</p></div><br/><form action=\"/comment\">Name: <input type=\"text\" name=\"name\"><br/>Comment: <input type=\"text\" name=\"contents\"><br/><input type=\"submit\" value=\"Submit\"></form></center></body></html>" {
+	if html != "<html><body><center><div style=\"background-color:green\"><h3>noah</h3><p>hi</p></div><br/><form action=\"/comment\">Name: <input type=\"text\" name=\"name\"><br/>Comment: <textarea rows=\"4\" cols=\"50\" name=\"contents\">Write your message here</textarea><br/><input type=\"submit\" value=\"Submit\"></form></center></body></html>" {
 		t.Errorf("Error: MsgsToHTML failed first test. Got: \"" + html + "\".")
 	}
 }

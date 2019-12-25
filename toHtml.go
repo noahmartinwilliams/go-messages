@@ -45,6 +45,6 @@ func MsgsToHTML(inputc chan string) string {
 		ret = ret + input
 	}
 
-	ret = ret + "<br/><form action=\"/comment\">Name: <input type=\"text\" name=\"name\"><br/>Comment: <input type=\"text\" name=\"contents\"><br/><input type=\"submit\" value=\"Submit\"></form></center></body></html>"
+	ret = ret + "<br/><form action=\"/comment\">Name: <input type=\"text\" name=\"name\"><br/>Comment: <textarea rows=\"4\" cols=\"50\" name=\"contents\">Write your message here</textarea><br/><input type=\"submit\" value=\"Submit\"></form></center></body></html>"
 	return ret
 }
