@@ -23,4 +23,17 @@ func TestMessageJar(t *testing.T) {
 	if reply.Name != "noah" {
 		t.Errorf("Error: MessageJar did not return correct name in first test. Expected: \"noah\". Got: \"" + reply.Name + "\".")
 	}
+
+	reqcc2 := make(chan chan Message)
+	addc2 := make(chan Message)
+	MessageJar( 1 * time.Millisecond, addc2, reqcc2)
+	reqc2 := make(chan Message)
+	addc2 <- Message{Name:"noah", Contents:"hi"}
+	time.Sleep(10 * time.Millisecond)
+	reqcc2 <- reqc2
+	reply2, ok := <-reqc2
+
+	if ok {
+		t.Errorf("Error: MessageJar returned {name:\"" + reply2.Name + "\", contents:\"" + reply2.Contents +"\"} during second test.")
+	}
 }

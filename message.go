@@ -27,9 +27,12 @@ func MessageJar(dur time.Duration, adder chan Message, requestc chan chan Messag
 			case del := <-delc:
 				delete(jar, del)
 			case req := <-requestc:
-				for _, value := range jar {
-					req <- value
-				}
+				go func() {
+					defer close(req)
+					for _, value := range jar {
+						req <- value
+					}
+				} ()
 		}
 	}
 	} ()
