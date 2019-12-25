@@ -5,6 +5,10 @@ func escapeString(input string) string {
 	for x := 0 ; x < len(input) ; x ++ {
 		if input[x] == '<' {
 			ret = ret + "&lt;"
+		} else if input[x] == '>' {
+			ret = ret + "&gt;"
+		} else if input[x] == '&' {
+			ret = ret + "&amp;"
 		} else {
 			ret = ret + string(input[x])
 		}

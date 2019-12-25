@@ -15,4 +15,17 @@ func TestMsgEscape(t *testing.T) {
 	if out1.Contents != "hello, world." {
 		t.Errorf("Error: MsgEscape did not return correct Contents. Expected: \"hello, world.\". Got: \"" + out1.Contents + "\".")
 	}
+
+	inputc <- Message{Name:"noah", Contents:"<html>"}
+	out2 := <-outc
+	if out2.Contents != "&lt;html&gt;" {
+		t.Errorf("Error: MsgEscape did not return correct contents. Expected: \"&lt;html&gt;\". Got: \"" + out2.Contents + "\"")
+	}
+
+	inputc <- Message{Name:"noah", Contents:"pb&j" }
+	out3 := <-outc
+	if out3.Contents != "pb&amp;j" {
+		t.Errorf("Error: MsgEscape did not return correct contents. Expected: \"pb&amp;j\". Got: \"" + out3.Contents + "\".")
+	}
+
 }
